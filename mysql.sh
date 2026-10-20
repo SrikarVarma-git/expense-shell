@@ -4,10 +4,11 @@ LOGS_FOLDER="/var/log/expense-shell"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME/$TIMESTAMP.log"
+DATE=$(date +%F)
 
 mkdir -p "$LOGS_FOLDER/$SCRIPT_NAME"
 
-echo "script is executed at:  $(DATE)"
+echo "script is executed at:  $DATE"
 
 USERID=$( id -u )
 R="\e[31m"
