@@ -6,7 +6,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME/$TIMESTAMP.log"
 DATE=$(date +%F)
 
-mkdir -p "$LOGS_FOLDER"
+mkdir -p "$LOGS_FOLDER/$SCRIPT_NAME"
 
 echo "script is executed at:  $DATE"
 
