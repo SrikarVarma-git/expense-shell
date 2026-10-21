@@ -55,7 +55,43 @@ then
     useradd expense
     SRIKAR $? "created user expense"
 else
-    echo -e "user expense is already created, so  $Y skip $N it"   | tee -a $LOG_FILE
+    echo -e "user expense is already created, so $Y skip $N it"   | tee -a $LOG_FILE
 fi
+
+mkdir /app
+SRIKAR $? "created directory"
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip   &>>$LOG_FILE
+
+cd /app
+rm -rf /app/*
+
+unzip /tmp/backend.zip   &>>$LOG_FILE
+SRIKAR $? "unzipped the code"
+
+
+npm install  &>>$LOG_FILE
+
+cp /home/ec2-user/expense-shell/backend.service  /etc/systemd/system/backend.service
+
+dnf install mysql -y                 &>>$LOG_FILE
+SRIKAR $? "installed mysql client"  
+
+mysql -h mysql.daws81s.store -uroot -pExpenseApp@1 < /app/schema/backend.sql
+SRIKAR $? "schema loading"
+
+systemctl start backend
+SRIKAR $? "backend started"
+
+systemctl enable backend
+SRIKAR $? "backend enabled"
+
+systemctl restart backend
+SRIKAR $? "backend restarted"
+
+
+
+
+
 
 
