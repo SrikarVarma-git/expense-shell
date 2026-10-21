@@ -38,12 +38,16 @@ SRIKAR(){
 }
 
 dnf install mysql-server -y
-SRIKAR $? "Installing mysql"   &>>$LOG_FILE
+SRIKAR $? "Installing mysql"   
 
 systemctl enable mysqld
-SRIKAR $? "enabling mysql"     
+SRIKAR $? "enabling mysql"    
 
 systemctl start mysqld
 SRIKAR $? "starting mysql"
+
+mysql_secure_installation --set-root-pass ExpenseApp@1
+SRIKAR $? "password set"
+
 
 
