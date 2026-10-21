@@ -54,7 +54,7 @@ then
     mysql_secure_installation --set-root-pass ExpenseApp@1
     SRIKAR $? "setting up the password"
 else
-    echo "the password has been already set, so skipping "   | tee -a $LOG_FILE   
+    echo -e "the password has been already set, so $R skipping $N "   | tee -a $LOG_FILE   
 fi
 
 
