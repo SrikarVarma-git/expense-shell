@@ -14,6 +14,7 @@ USERID=$( id -u )
 R="\e[31m"
 G="\e[32m"
 N="\e[0m"
+Y="\e[33m"
     
 VARMA(){
     if [ $1 -ne 0 ]
@@ -44,11 +45,17 @@ dnf module enable nodejs:20 -y
 SRIKAR $? "Enabled nodejs 20"
 
 dnf install nodejs -y
-SRIKAR $? "installed nodejs"
-
-useradd expense
-SRIKAR $? "added user expense"
+SRIKAR $? "installed nodejs"  
 
 
+id expense   &>>$LOG_FILE
+if [ $? -ne 0 ]
+then 
+    echo "create the user expense" 
+    useradd expense
+    SRIKAR $? "created user expense"
+else
+    echo -e "user expense is already created, so  $Y skip $N it"   | tee -a $LOG_FILE
+fi
 
 
