@@ -46,7 +46,7 @@ SRIKAR $? "enabling mysql"
 systemctl start mysqld
 SRIKAR $? "starting mysql"
 
-mysql -h mysql.daws81s.store -u root -p<ExpenseApp@1> -e 'show databases;'  &>>$LOG_FILE
+mysql -h mysql.daws81s.store -u root -pExpenseApp@1 -e 'show databases;'  &>>$LOG_FILE
 
 if [ $? -ne 0 ]
 then 
